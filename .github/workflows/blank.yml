@@ -46,6 +46,8 @@ jobs:
           draft: true
           prerelease: false
   build:
+    name: Build Zip File
+    needs: [release]
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -63,3 +65,29 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: ls
+      - name: Upload Resource Zip
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.release.outputs.upload_url }}
+          asset_path: FireIceResources.zip
+          asset_name: FireIceResources.zip
+          asset_content_type: application/zip
+          
+  metadata:
+    name: Publish Release
+    needs: [release, build]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: eregon/publish-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        release_id: ${{ needs.release.outputs.release_id }}
+    - uses: eregon/keep-last-n-releases@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        n: 3
+        remove_tags_without_release: true
