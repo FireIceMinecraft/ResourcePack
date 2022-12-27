@@ -15,9 +15,37 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  release:
+      name: Create GitHub Release
+      runs-on: ubuntu-latest
+      outputs:
+        release_id: ${{ steps.create_release.outputs.id }}
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+      steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+        if: github.event_name == 'schedule'
+      - name: Create tag
+        id: create_tag
+        run: |
+          if [[ "${{ github.event_name }}" == "schedule" ]]; then
+            tag=v$(date +%Y%m%d.%H%M%S)
+          else
+            tag=$(basename "${{ github.ref }}")
+          fi
+          echo "::set-output name=tag::$tag"
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.create_tag.outputs.tag }}
+          release_name: ${{ steps.create_tag.outputs.tag }}
+          draft: true
+          prerelease: false
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
