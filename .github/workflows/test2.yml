@@ -32,7 +32,7 @@ jobs:
         run: sha1sum FireIceResources.zip | head -c 40 > sha1hash.txt
       - name: Make random version number
         id: version
-        run: uuidgen > $random
+        run: $VERSION = uuidgen
         
       - name: Tag Release Upload
         uses: dothq/tag-and-release-and-upload@v1.0.2
@@ -40,7 +40,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           
           # Use the version from the previous step
-          version: v$random
+          version: v$VERSION
           
           assets: '[ "FireIceResources.zip", "hash.sha1" ]'
           overwrite: false        
