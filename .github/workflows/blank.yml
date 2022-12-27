@@ -1,4 +1,3 @@
-# This is a basic workflow to help you get started with Actions
 
 name: CI
 
@@ -61,10 +60,9 @@ jobs:
         run: ls 
       # Runs a single command using the runners shell
       - name: Zip output
-        run: zip -qq -r FireIceResources.zip *
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: ls
+        run: zip -qq -r FireIceResources.zip assets pack.mcmeta pack.png readme.txt
+      - name: Generate sha1 hash for FireIceResources.zip
+        run: sha1sum FireIceResources.zip | head -c 40 > sha1hash.txt
       - name: Upload Resource Zip
         uses: actions/upload-release-asset@v1
         env:
@@ -74,6 +72,16 @@ jobs:
           asset_path: FireIceResources.zip
           asset_name: FireIceResources.zip
           asset_content_type: application/zip
+
+      - name: Upload Zip Hash
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.release.outputs.upload_url }}
+          asset_path: sha1hash.txt
+          asset_name: sha1hash.txt
+          asset_content_type: application/txt
           
   metadata:
     name: Publish Release
