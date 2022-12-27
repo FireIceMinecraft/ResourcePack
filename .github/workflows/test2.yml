@@ -32,7 +32,7 @@ jobs:
         run: sha1sum FireIceResources.zip | head -c 40 > sha1hash.txt
       - name: Make random version number
         id: version
-        run: uuidgen >> $GITHUB_OUTPUT
+        run: uuidgen > $GITHUB_OUTPUT
         
       - name: Tag and Release
         uses: jasondavis303/tag-and-release-and-upload@v1.2.0
