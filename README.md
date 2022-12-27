@@ -1,2 +1,2 @@
-# FireIcePack
+# FireIceResourcePack
 Test for Luna
