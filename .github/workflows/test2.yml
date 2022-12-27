@@ -40,7 +40,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           
           # Use the version from the previous step
-          version: v$VERSION
+          version: vtestpleasework
           
           assets: '[ "FireIceResources.zip", "hash.sha1" ]'
           overwrite: false        
