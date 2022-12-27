@@ -34,8 +34,8 @@ jobs:
         id: version
         run: uuidgen > $random
         
-      - name: Tag and Release
-        uses: jasondavis303/tag-and-release-and-upload@v1.2.0
+      - name: Tag Release Upload
+        uses: dothq/tag-and-release-and-upload@v1.0.2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           
