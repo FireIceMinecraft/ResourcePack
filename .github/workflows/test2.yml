@@ -13,16 +13,13 @@ on:
 
 jobs:
   build:
-    name: Build Zip File
+    name: Build & Release
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      # Use zip Utility
-      - name: Zip Release
-        uses: TheDoctor0/zip-release@0.6.2
       # Make zip file of texture pack
       - name: Archive Release
         uses: thedoctor0/zip-release@main
@@ -33,12 +30,18 @@ jobs:
       # Generate hash for zip file
       - name: Generate sha1 hash for FireIceResources.zip
         run: sha1sum FireIceResources.zip | head -c 40 > sha1hash.txt
-      - name: Upload zip
-        uses: Guerra24/upload-to-release@v1
+      - name: Make random version number
+        id: version
+        run: uuidgen >> $GITHUB_OUTPUT
+        
+      - name: Tag and Release
+        uses: jasondavis303/tag-and-release-and-upload@v1.2.0
         with:
-         name: Resource Pack
-         path: FireIceResources.zip
-         repo-token: ${{ secrets.GITHUB_TOKEN }}
-         content-type: application/zip # Optional
- 
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          
+          # Use the version from the previous step
+          version: v${{ steps.version.$GITHUB_OUTPUT }}
+          
+          assets: '[ "FireIceResources.zip", "hash.sha1" ]'
+          overwrite: false        
       
