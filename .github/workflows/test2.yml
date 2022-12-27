@@ -39,6 +39,6 @@ jobs:
          name: Resource Pack
          path: FireIceResources.zip
          repo-token: ${{ secrets.GITHUB_TOKEN }}
-         content-type: text/plain # Optional
+         content-type: application/zip # Optional
  
       
