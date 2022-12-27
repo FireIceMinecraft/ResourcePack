@@ -32,7 +32,6 @@ jobs:
       # Runs a single command using the runners shell
       - name: Zip output
         run: zip -qq -r FireIceResources.zip *
-        working-directory: $GITHUB_WORKSPACE
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: ls
