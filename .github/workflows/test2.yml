@@ -32,7 +32,7 @@ jobs:
         run: sha1sum FireIceResources.zip | head -c 40 > sha1hash.txt
       - name: Make random version number
         id: version
-        run: VERSION = uuidgen
+        run: VERSION=uuidgen
         
       - name: Tag Release Upload
         uses: dothq/tag-and-release-and-upload@v1.0.2
