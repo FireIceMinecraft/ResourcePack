@@ -29,7 +29,7 @@ jobs:
           exclusions: '*.git*'
       # Generate hash for zip file
       - name: Generate sha1 hash for FireIceResources.zip
-        run: sha1sum FireIceResources.zip | head -c 40 > sha1hash.txt
+        run: sha1sum FireIceResources.zip | head -c 40 > hash.sha1
       - name: Make random version number
         id: version
         run: VERSION=uuidgen
