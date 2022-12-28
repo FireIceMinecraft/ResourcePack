@@ -27,7 +27,8 @@ jobs:
         uses: thedoctor0/zip-release@main
         with:
           type: 'zip'
-          path: '/home/runner/work/ResourcePack/ResourcePack/Disasters/*'
+          directory: 'Disasters'
+          path: '.'
           filename: '/home/runner/work/ResourcePack/ResourcePack/Disasters.zip'
           exclusions: '*.git*'
       - name: Fix dir after zip creation
