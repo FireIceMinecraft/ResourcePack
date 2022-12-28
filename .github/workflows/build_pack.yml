@@ -21,18 +21,16 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       # Make zip file of texture pack
-      - name: Archive Release
+      - name: Compress Disasters Pack
         uses: thedoctor0/zip-release@main
         with:
           type: 'zip'
-          filename: 'FireIceResources.zip'
+          path: 'Disasters/*'
+          filename: ' Disasters.zip'
           exclusions: '*.git*'
       # Generate hash for zip file
       - name: Generate sha1 hash for FireIceResources.zip
-        run: sha1sum FireIceResources.zip | head -c 40 > hash.sha1
-      - name: Make random version number
-        id: version
-        run: VERSION=uuidgen
+        run: sha1sum Disasters.zip | head -c 40 > Disasters.sha1
       - name: Update Release
         uses: andelf/nightly-release@main
         env:
@@ -44,4 +42,4 @@ jobs:
           body: 'This is an automated release.'
           files: |
             ./hash.sha1
-            ./FireIceResources.zip
+            ./Disasters.zip
