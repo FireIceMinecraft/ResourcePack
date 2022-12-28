@@ -24,7 +24,6 @@ jobs:
       - name: Compress Disasters Pack
         uses: thedoctor0/zip-release@main
         with:
-          #type: 'zip'
           directory: 'Disasters'
           filename: '../Disasters.zip'
           exclusions: '*.git*'
@@ -45,5 +44,5 @@ jobs:
           prerelease: false
           body: 'This is an automated release.'
           files: |
-            ./Disasters.sha1
-            ./Disasters.zip
+            ./*.sha1
+            ./*.zip
