@@ -20,13 +20,14 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      - name: Fix Dir
+        run: cd Disasters
       # Make zip file of texture pack
       - name: Compress Disasters Pack
         uses: thedoctor0/zip-release@main
         with:
           type: 'zip'
-          path: 'Disasters/*'
-          filename: ' Disasters.zip'
+          filename: '../Disasters.zip'
           exclusions: '*.git*'
       # Generate hash for zip file
       - name: Generate sha1 hash for packs
