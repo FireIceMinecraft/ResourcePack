@@ -27,7 +27,7 @@ jobs:
           type: 'zip'
           directory: 'Disasters'
           path: '.'
-          filename: 'Disasters.zip'
+          filename: '../Disasters.zip'
           exclusions: '*.git*'
 
       # Generate hashes for zip file
