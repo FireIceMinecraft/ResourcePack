@@ -27,17 +27,15 @@ jobs:
         uses: thedoctor0/zip-release@main
         with:
           type: 'zip'
-          filename: 'Disasters.zip'
+          filename: '/home/runner/work/ResourcePack/ResourcePack/Disasters.zip'
           exclusions: '*.git*'
-      - name: Move zip to root dir.
-        run: mv Disasters.zip ..
       - name: Fix dir after zip creation
         run: cd ..
       - name: Check if not a happy camper
         run: |
           pwd
           ls
-          
+
 
       # Generate hash for zip file
       - name: Generate sha1 hash for packs
