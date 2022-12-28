@@ -24,9 +24,8 @@ jobs:
       - name: Compress Disasters Pack
         uses: thedoctor0/zip-release@main
         with:
-          type: 'zip'
+          #type: 'zip'
           directory: 'Disasters'
-          path: '.'
           filename: '../Disasters.zip'
           exclusions: '*.git*'
 
