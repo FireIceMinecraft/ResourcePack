@@ -29,17 +29,18 @@ jobs:
           filename: ' Disasters.zip'
           exclusions: '*.git*'
       # Generate hash for zip file
-      - name: Generate sha1 hash for FireIceResources.zip
+      - name: Generate sha1 hash for packs
         run: sha1sum Disasters.zip | head -c 40 > Disasters.sha1
+      #Update Release
       - name: Update Release
         uses: andelf/nightly-release@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: auto
-          name: 'Resource Pack Auto Release $$'
+          name: 'Resource Packs Auto Release $$'
           prerelease: false
           body: 'This is an automated release.'
           files: |
-            ./hash.sha1
+            ./Disasters.sha1
             ./Disasters.zip
