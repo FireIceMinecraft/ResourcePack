@@ -34,7 +34,10 @@ jobs:
       - name: Fix dir after zip creation
         run: cd ..
       - name: Check if not a happy camper
-        run: ls
+        run: |
+          pwd
+          ls
+          
 
       # Generate hash for zip file
       - name: Generate sha1 hash for packs
