@@ -20,8 +20,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-     # - name: Frick up dir for zip creation
-       # run: cd Disasters
       # Make zip file of texture pack
       - name: Compress Disasters Pack
         uses: thedoctor0/zip-release@main
@@ -29,19 +27,14 @@ jobs:
           type: 'zip'
           directory: 'Disasters'
           path: '.'
-          filename: '/home/runner/work/ResourcePack/ResourcePack/Disasters.zip'
+          filename: 'Disasters.zip'
           exclusions: '*.git*'
-     # - name: Fix dir after zip creation
-      #  run: cd ..
-      - name: Check if not a happy camper
-        run: |
-          pwd
-          ls
 
-
-      # Generate hash for zip file
+      # Generate hashes for zip file
       - name: Generate sha1 hash for packs
-        run: sha1sum Disasters.zip | head -c 40 > Disasters.sha1
+        run: |
+          sha1sum Disasters.zip | head -c 40 > Disasters.sha1
+
       #Update Release
       - name: Update Release
         uses: andelf/nightly-release@main
@@ -49,7 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: auto
-          name: 'Resource Packs Auto Release $$'
+          name: 'Auto Release $$'
           prerelease: false
           body: 'This is an automated release.'
           files: |
