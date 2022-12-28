@@ -20,7 +20,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - name: Fuck up dir for zip creation
+      - name: Frick up dir for zip creation
         run: cd Disasters
       # Make zip file of texture pack
       - name: Compress Disasters Pack
@@ -31,6 +31,9 @@ jobs:
           exclusions: '*.git*'
       - name: Fix dir after zip creation
         run: cd ..
+      - name: Check if not a happy camper
+        run: ls
+
       # Generate hash for zip file
       - name: Generate sha1 hash for packs
         run: sha1sum Disasters.zip | head -c 40 > Disasters.sha1
