@@ -32,9 +32,8 @@ jobs:
       - name: Generate sha1 hash for packs
         run: |
           sha1sum Disasters.zip | head -c 40 > Disasters.sha1
-      - name: Set var of hash
-        run: echo "Disasters_HASH=$(sha1sum Disasters.zip | head -c 40)" >> $GITHUB_ENV
-      - name: Set sha1 hash
+          echo "Disasters_HASH=$(sha1sum Disasters.zip | head -c 40)" >> $GITHUB_ENV
+      - name: Set sha1 hash in panel
         run: |
           curl "https://panel.fireiceminecraft.com/api/client/servers/08f9a2b0/startup/variable" \
                   -H 'Accept: application/json' \
