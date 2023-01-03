@@ -43,7 +43,7 @@ jobs:
                   -H 'Content-Type: application/json' \
                   -H 'Authorization: Bearer ${{ secrets.DISASTERS_TOKEN }}' \
                   -X PUT \
-                  -d '{ "key": "PACK_SHA1", "value": "{{$PACK_HASH}}" }' 
+                  -d '{ "key": "PACK_SHA1", "value": "$(PACK_HASH)" }' 
 
       #Update Release
       - name: Update Release
