@@ -33,17 +33,15 @@ jobs:
         run: |
           sha1sum Disasters.zip | head -c 40 > Disasters.sha1
       - name: Set var of hash
-        run: HASH=sha1sum Disasters.zip | head -c 40
+        run: echo "Disasters_HASH=$(sha1sum Disasters.zip | head -c 40)" >> $GITHUB_ENV
       - name: Set sha1 hash
-        env:
-          PACK_HASH: sha1sum Disasters.zip | head -c 40
         run: |
           curl "https://panel.fireiceminecraft.com/api/client/servers/08f9a2b0/startup/variable" \
                   -H 'Accept: application/json' \
                   -H 'Content-Type: application/json' \
                   -H 'Authorization: Bearer ${{ secrets.DISASTERS_TOKEN }}' \
                   -X PUT \
-                  -d "{\"key\":\"PACK_SHA1\",\"value\":\"$PACK_HASH\"}"
+                  -d "{\"key\":\"PACK_SHA1\",\"value\":\"${{ env.Disasters_HASH }}\"}"
 
       #Update Release
       - name: Update Release
