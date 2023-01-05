@@ -1,0 +1,8 @@
+{
+
+"textures":{
+"layer0":"item/carved_pumpkin"},
+ "overrides": [
+ { "predicate": { "custom_model_data": 1}, "model":"item/propeller_hat" }
+ ]
+}
