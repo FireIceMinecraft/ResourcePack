@@ -1,7 +1,7 @@
 # FireIce Resource Pack Collection
 This repo a collection of the resource packs used on the FireIce Minecraft server.
 
-# Credits
+# Song Credits
 All songs used under CreativeCommons.
 https://creativecommons.org/licenses/by/4.0/
 
