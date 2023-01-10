@@ -47,7 +47,7 @@ jobs:
               --url https://panel.fireiceminecraft.com/api/client/servers/45c79746/command \
               --header 'Authorization: Bearer ${{ secrets.DISASTERS_TOKEN }}' \
               --header 'Content-Type: application/json' \
-              --data '{"command": "forepackreload"}'
+              --data '{"command": "forcepackreload"}'
           #curl "https://panel.fireiceminecraft.com/api/client/servers/08f9a2b0/startup/variable" \
               #    -H 'Accept: application/json' \
              #     -H 'Content-Type: application/json' \
