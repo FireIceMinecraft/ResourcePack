@@ -27,13 +27,21 @@ jobs:
           directory: 'Disasters'
           filename: '../Disasters.zip'
           exclusions: '*.git*'
+      - name: Compress TowerDefense Pack
+        uses: thedoctor0/zip-release@main
+        with:
+          directory: 'TowerDefense'
+          filename: '../TowerDefense.zip'
+          exclusions: '*.git*'
 
       # Generate hashes for zip file
       - name: Generate sha1 hash for packs
         run: |
           sha1sum Disasters.zip | head -c 40 > Disasters.sha1
           echo "Disasters_HASH=$(sha1sum Disasters.zip | head -c 40)" >> $GITHUB_ENV
-      - name: Set sha1 hash in panel
+          sha1sum TowerDefense.zip | head -c 40 > TowerDefense.sha1
+          echo "TowerDefense_HASH=$(sha1sum TowerDefense.zip | head -c 40)" >> $GITHUB_ENV
+      - name: Set sha1 hashes in panel
         run: |
           curl "https://panel.fireiceminecraft.com/api/client/servers/08f9a2b0/startup/variable" \
                   -H 'Accept: application/json' \
@@ -41,6 +49,12 @@ jobs:
                   -H 'Authorization: Bearer ${{ secrets.DISASTERS_TOKEN }}' \
                   -X PUT \
                   -d "{\"key\":\"PACK_SHA1\",\"value\":\"${{ env.Disasters_HASH }}\"}"
+          curl "https://panel.fireiceminecraft.com/api/client/servers/eec39247/startup/variable" \
+                  -H 'Accept: application/json' \
+                  -H 'Content-Type: application/json' \
+                  -H 'Authorization: Bearer ${{ secrets.DISASTERS_TOKEN }}' \
+                  -X PUT \
+                  -d "{\"key\":\"PACK_SHA1\",\"value\":\"${{ env.TowerDefense_HASH }}\"}"
 
       #Update Release
       - name: Update Release
