@@ -33,6 +33,12 @@ jobs:
           directory: 'TowerDefense'
           filename: '../TowerDefense.zip'
           exclusions: '*.git*'
+      - name: Compress Dungeons Pack
+        uses: thedoctor0/zip-release@main
+        with:
+          directory: 'Dungeon'
+          filename: '../Dungeon.zip'
+          exclusions: '*.git*'
 
       # Generate hashes for zip file
       - name: Generate sha1 hash for packs
@@ -41,6 +47,8 @@ jobs:
           echo "Disasters_HASH=$(sha1sum Disasters.zip | head -c 40)" >> $GITHUB_ENV
           sha1sum TowerDefense.zip | head -c 40 > TowerDefense.sha1
           echo "TowerDefense_HASH=$(sha1sum TowerDefense.zip | head -c 40)" >> $GITHUB_ENV
+          sha1sum Dungeon.zip | head -c 40 > Dungeon.sha1
+          echo "Dungeon_HASH=$(sha1sum Dungeon.zip | head -c 40)" >> $GITHUB_ENV
       
       #Update Release
       - name: Update Release
